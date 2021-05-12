@@ -1,0 +1,21 @@
+.galery__places {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  column-gap: 18px;
+  row-gap: 20px;
+  grid-template-columns: repeat(3, calc((100% - (18px*2)) / 3));
+
+}
+
+@media screen and (max-width: 920px) {
+  .galery__places {
+  grid-template-columns: repeat(2, calc((100% - 18px) / 2));
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .galery__places {
+  grid-template-columns: 100%;
+  }
+}

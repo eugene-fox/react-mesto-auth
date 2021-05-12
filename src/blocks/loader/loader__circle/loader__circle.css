@@ -1,0 +1,16 @@
+.loader__circle {
+  display: block;
+  width: 85px;
+  height: 85px;
+  margin: 40px auto;
+  border: 2px solid;
+  border-color: #fff #fff #fff #000;
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

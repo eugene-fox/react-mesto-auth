@@ -1,0 +1,16 @@
+.place-card__photo {
+  display: block;
+  width: 282px;
+  height: 282px;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
+/* @media screen and (max-width: 768px) {
+  .place-card__photo {
+    max-width: none;
+    width: 100%;
+  }
+} */
