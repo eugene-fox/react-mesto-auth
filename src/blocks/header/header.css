@@ -1,10 +1,9 @@
 .header {
-  max-width: 882px;
   min-width: 280px;
   min-height: 74px;
   /* Верхний марджин схлопывается */
-  padding-top: 45px;
-  margin: 0 auto 40px;
+  padding: 45px 0 40px 0;
+  margin-bottom: 40px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   display: flex;
   justify-content: space-between;

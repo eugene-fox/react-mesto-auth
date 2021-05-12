@@ -4,7 +4,7 @@ import headerLogoPath from '../images/header-logo.svg';
 
 export function Header() {
   return (
-    <header className="header">
+    <header className="page__section header">
       <img className="header__logo" src={headerLogoPath} alt="Логотип Mesto Russia" />
       <Switch>
         <Route path="/" exact>
