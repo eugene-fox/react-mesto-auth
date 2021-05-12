@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
 
 import { Header } from './Header';
 import { Main } from './Main';
@@ -113,47 +114,55 @@ function App() {
         <div className="page">
           <div className="page__content">
             <Header />
+            <Switch>
+              <Route path="/" exact>
+                <Main
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onCardClick={handleCardClick}
+                  cards={cards}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                  isCardsLoading={isCardsLoading}
+                />
 
-            <Main
-              onEditAvatar={handleEditAvatarClick}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
-              isCardsLoading={isCardsLoading}
-            />
+                <EditAvatarPopup
+                  isOpen={isEditAvatarPopupOpen}
+                  onClose={closeAllPopups}
+                  onUpdateAvatar={handleUpdateAvatar}
+                  isDataSending={isDataSending}
+                />
 
+                <EditProfilePopup
+                  isOpen={isEditProfilePopupOpen}
+                  onClose={closeAllPopups}
+                  onUpdateUser={handleUpdateUser}
+                  isDataSending={isDataSending}
+                />
+
+                <AddPlacePopup
+                  isOpen={isAddPlacePopupOpen}
+                  onClose={closeAllPopups}
+                  onAddPlace={handleAddPlaceSubmit}
+                  isDataSending={isDataSending}
+                />
+
+                <PopupWithForm name="delete-confirm" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups} />
+
+                <ImagePopup
+                  card={selectedCard}
+                  onClose={closeAllPopups}
+                />
+              </Route>
+              <Route path="/sign-up">
+
+              </Route>
+              <Route path="/sign-in">
+
+              </Route>
+            </Switch>
             <Footer />
-
-            <EditAvatarPopup
-              isOpen={isEditAvatarPopupOpen}
-              onClose={closeAllPopups}
-              onUpdateAvatar={handleUpdateAvatar}
-              isDataSending={isDataSending}
-            />
-
-            <EditProfilePopup
-              isOpen={isEditProfilePopupOpen}
-              onClose={closeAllPopups}
-              onUpdateUser={handleUpdateUser}
-              isDataSending={isDataSending}
-            />
-
-            <AddPlacePopup
-              isOpen={isAddPlacePopupOpen}
-              onClose={closeAllPopups}
-              onAddPlace={handleAddPlaceSubmit}
-              isDataSending={isDataSending}
-            />
-
-            <PopupWithForm name="delete-confirm" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups} />
-
-            <ImagePopup
-              card={selectedCard}
-              onClose={closeAllPopups}
-            />
 
           </div>
         </div>

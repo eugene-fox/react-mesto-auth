@@ -6,6 +6,10 @@
 
 @import url("./blocks/header/header.css");
 @import url("./blocks/header/__logo/header__logo.css");
+@import url("./blocks/header/__info/header__info.css");
+@import url("./blocks/header/__mail/header__mail.css");
+@import url("./blocks/header/__logout/header__logout.css");
+@import url("./blocks/header/__navigation-link/header__navigation-link.css");
 
 @import url("./blocks/footer/footer.css");
 @import url("./blocks/footer/__copyright/footer__copyright.css");

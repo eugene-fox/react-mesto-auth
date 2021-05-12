@@ -1,0 +1,11 @@
+.header__logout {
+  border: none;
+  background-color: #000;
+  color: #A9A9A9;
+  cursor: pointer;
+  transition: opacity .5s;
+}
+
+.header__logout:hover {
+  opacity: .8;
+}
