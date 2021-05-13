@@ -43,6 +43,13 @@
 @import url("./blocks/place-card/__photo-name/place-card__photo-name.css");
 @import url("./blocks/place-card/__photo/place-card__photo.css");
 
+@import url("./blocks/user-auth-form/user-auth-form.css");
+@import url("./blocks/user-auth-form/__title/user-auth-form__title.css");
+@import url("./blocks/user-auth-form/__input/user-auth-form__input.css");
+@import url("./blocks/user-auth-form/__button/user-auth-form__button.css");
+@import url("./blocks/user-auth-form/__bottom-text/user-auth-form__bottom-text.css");
+@import url("./blocks/user-auth-form/__link/user-auth-form__link.css");
+
 @import url("./blocks/popup/popup.css");
 @import url("./blocks/popup/_opened/popup_opened.css");
 @import url("./blocks/popup/__container/popup__container.css");

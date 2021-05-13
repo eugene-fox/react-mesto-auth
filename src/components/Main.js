@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { Card } from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { Loader} from './Loader';
@@ -18,7 +18,7 @@ export function Main({
 
   return (
     <main>
-      <section className="profile">
+      <section className="page__section profile">
         <div className="profile__information">
           <div className="profile__avatar">
             <img className="profile__avatar-picture" src={currentUser.avatar}
@@ -46,7 +46,7 @@ export function Main({
           />
         </div>
       </section>
-      <section className="galery">
+      <section className="galery page__section">
 
         {isCardsLoading && <Loader />}
 

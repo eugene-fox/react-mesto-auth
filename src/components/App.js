@@ -9,6 +9,9 @@ import { EditProfilePopup } from './EditProfilePopup';
 import { EditAvatarPopup } from './EditAvatarPopup';
 import { AddPlacePopup } from './AddPlacePopup';
 import { ImagePopup } from './ImagePopup';
+import { Login } from './Login';
+import { Register } from './Register';
+import { ProtectedRoute } from './ProtectedRoute';
 
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -20,6 +23,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isCardsLoading, setIsCardsLoading] = useState(false);
   const [isDataSending, setIsDataSending] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   //Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
@@ -114,8 +118,12 @@ function App() {
         <div className="page">
           <div className="page__content">
             <Header />
+
             <Switch>
-              <Route path="/" exact>
+              <ProtectedRoute
+                isLoggedIn={isLoggedIn}
+                path="/" exact
+              >
                 <Main
                   onEditAvatar={handleEditAvatarClick}
                   onEditProfile={handleEditProfileClick}
@@ -148,22 +156,30 @@ function App() {
                   isDataSending={isDataSending}
                 />
 
-                <PopupWithForm name="delete-confirm" title="Вы уверены?" buttonText="Да" onClose={closeAllPopups} />
+                <PopupWithForm
+                  name="delete-confirm"
+                  title="Вы уверены?"
+                  buttonText="Да"
+                  onClose={closeAllPopups}
+                />
 
                 <ImagePopup
                   card={selectedCard}
                   onClose={closeAllPopups}
                 />
-              </Route>
+              </ProtectedRoute>
+
               <Route path="/sign-up">
-
+                <Register />
               </Route>
+
               <Route path="/sign-in">
-
+                <Login />
               </Route>
-            </Switch>
-            <Footer />
 
+            </Switch>
+
+            <Footer />
           </div>
         </div>
       </div>

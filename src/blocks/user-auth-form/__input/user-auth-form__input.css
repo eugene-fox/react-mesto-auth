@@ -1,0 +1,18 @@
+.user-auth-form__input {
+  width: 100%;
+  margin: 0 0 30px;
+  padding-bottom: 13px;
+  background-color: black;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: #fff;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  ;
+}
+
+.user-auth-form__input::placeholder {
+  font-weight: normal;
+  color: #ccc;
+}
