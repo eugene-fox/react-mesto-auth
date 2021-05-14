@@ -37,31 +37,42 @@ function App() {
   const history = useHistory();
 
   //Проверяем, есть в локальном хранилище токен
-  // const tokenCheck = () => {
-  //   const jwt = localStorage.getItem('jwt');
-  //   console.log(jwt);
-  //   if (!jwt) {
-  //     console.log('Токен не найден');
-  //     return;
-  //   }
-  // }
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (!jwt) {
+      return;
+    }
+    authApi.checkToken(jwt)
+      .then(res => {
+        setEmail(res.data.email);
+        setIsLoggedIn(true);
+        history.push('/');
+      })
+  }
 
-  // useEffect(() => {
-  //   tokenCheck();
-  // }, []);
+  //Проверка токена при монтировании компонента
+  useEffect(() => {
+    tokenCheck();
+  }, []);
 
   const onRegister = (data) => {
     return authApi
       .register(data)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         history.push('/sign-in');
         setToolTipData({
           isOpen: true,
           icon: 'check',
           text: 'Вы успешно зарегистрировались!'
-        })
+        });
       })
+      .catch(() => {
+        setToolTipData({
+          isOpen: true,
+          icon: 'cross',
+          text: 'Что-то пошло не так! Попробуйте ещё раз.'
+        });
+      });
   };
 
   const onLogin = ({ email, password }) => {
@@ -69,16 +80,25 @@ function App() {
       .authorize({ email, password })
       .then((res) => {
         setIsLoggedIn(true);
+        localStorage.setItem('jwt', res.token);
         setEmail(email);
         history.push('/');
-        console.log(res);
-        console.log(isLoggedIn, email);
       })
+      .catch(() => {
+        setToolTipData({
+          isOpen: true,
+          icon: 'cross',
+          text: 'Что-то пошло не так! Попробуйте ещё раз.'
+        });
+      });
   };
 
   const onLogout = () => {
-setIsLoggedIn(false);
-history.push('/sign-in');
+    localStorage.removeItem('jwt');
+    setCurrentUser({});
+    setCards([]);
+    setIsLoggedIn(false);
+    history.push('/sign-in');
   }
 
   //Стейт данных текущего пользователя
@@ -119,7 +139,6 @@ history.push('/sign-in');
       icon: '',
       text: ''
     });
-    console.log(toolTipData);
     setSelectedCard(null);
   }
 
@@ -137,7 +156,6 @@ history.push('/sign-in');
     setIsDataSending(true);
     api.updataAvatar({ avatar: newAvatarUrl }).then((data) => {
       setCurrentUser(data);
-      console.log(currentUser);
       closeAllPopups();
     }).catch(err => console.log(err)).finally(() => {
       setIsDataSending(false);

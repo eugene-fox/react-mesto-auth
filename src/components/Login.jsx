@@ -43,7 +43,7 @@ export function Login({ onLogin }) {
         <input
           className="user-auth-form__input"
           placeholder="Пароль"
-          type="text"
+          type="password"
           name="password"
           id=""
           value={loginData.password}

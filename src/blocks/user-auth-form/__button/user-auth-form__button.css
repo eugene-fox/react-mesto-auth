@@ -3,5 +3,6 @@
   background: #fff;
   border-radius: 2px;
   padding: 14px 0;
-  margin: 216px 0 15px;
+  align-self: flex-end;
+  margin: 80px 0 66px;
 }

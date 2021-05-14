@@ -17,8 +17,8 @@ export function Main({
   const currentUser = useContext(CurrentUserContext);
 
   return (
-    <main>
-      <section className="page__section profile">
+    <main className="content">
+      <section className="profile page__section">
         <div className="profile__information">
           <div className="profile__avatar">
             <img className="profile__avatar-picture" src={currentUser.avatar}
@@ -46,7 +46,7 @@ export function Main({
           />
         </div>
       </section>
-      <section className="galery page__section">
+      <section className="galery">
 
         {isCardsLoading && <Loader />}
 

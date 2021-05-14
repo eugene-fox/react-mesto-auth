@@ -42,7 +42,7 @@ export function Register({ onRegister }) {
         <input
           className="user-auth-form__input"
           placeholder="Пароль"
-          type="text  "
+          type="password"
           name="password"
           id=""
           required
