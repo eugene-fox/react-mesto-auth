@@ -6,7 +6,7 @@ export default class Api {
   }
 
   //проверяем ответ сервера
-  checkResponse(res) {
+   checkResponse(res) {
     if (res.ok) {
       return res.json();
     }

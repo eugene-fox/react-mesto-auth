@@ -23,7 +23,22 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [isCardsLoading, setIsCardsLoading] = useState(false);
   const [isDataSending, setIsDataSending] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //Проверяем, есть в локальном хранилище токен
+  // const tokenCheck = () => {
+  //   const jwt = localStorage.getItem('jwt');
+  //   console.log(jwt);
+  //   if (!jwt) {
+  //     console.log('Токен не найден');
+  //     return;
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   tokenCheck();
+  // }, []);
 
   //Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
