@@ -2,7 +2,9 @@
 
 Cервисо Mesto: интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
-~~Готовый проект можно посмотреть по ссылке [https://eugene-fox.github.io/mesto-react/](https://eugene-fox.github.io/mesto-react/).~~
+В данной работе реализованна авторизациия пользователя и хранения его токена.
+
+~~Готовый проект можно посмотреть по ссылке [https://eugene-fox.github.io/react-mesto-auth/](https://eugene-fox.github.io/react-mesto-auth/).~~
 
 ## Доступные скрипты
 
