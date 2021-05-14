@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
 
 import { Header } from './Header';
 import { Main } from './Main';
@@ -12,19 +12,29 @@ import { ImagePopup } from './ImagePopup';
 import { Login } from './Login';
 import { Register } from './Register';
 import { ProtectedRoute } from './ProtectedRoute';
+import { InfoTooltip } from './InfoTooltip';
 
 import { api } from '../utils/api';
+import * as authApi from '../utils/authApi';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [toolTipData, setToolTipData] = useState({
+    isOpen: false,
+    icon: '',
+    text: ''
+  });
+
   const [selectedCard, setSelectedCard] = useState(null);
   const [isCardsLoading, setIsCardsLoading] = useState(false);
   const [isDataSending, setIsDataSending] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const history = useHistory();
 
   //Проверяем, есть в локальном хранилище токен
   // const tokenCheck = () => {
@@ -40,19 +50,52 @@ function App() {
   //   tokenCheck();
   // }, []);
 
+  const onRegister = (data) => {
+    return authApi
+      .register(data)
+      .then((res) => {
+        console.log(res);
+        history.push('/sign-in');
+        setToolTipData({
+          isOpen: true,
+          icon: 'check',
+          text: 'Вы успешно зарегистрировались!'
+        })
+      })
+  };
+
+  const onLogin = ({ email, password }) => {
+    return authApi
+      .authorize({ email, password })
+      .then((res) => {
+        setIsLoggedIn(true);
+        setEmail(email);
+        history.push('/');
+        console.log(res);
+        console.log(isLoggedIn, email);
+      })
+  };
+
+  const onLogout = () => {
+setIsLoggedIn(false);
+history.push('/sign-in');
+  }
+
   //Стейт данных текущего пользователя
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-    setIsCardsLoading(true);
-    Promise.all([api.getUserInfo(), api.getCards()])
-      .then(([userData, cardData]) => {
-        setCurrentUser(userData);
-        setCards(cardData);
-      }).catch(err => console.log(err)).finally(() => {
-        setIsCardsLoading(false);
-      });
-  }, []);
+    if (isLoggedIn) {
+      setIsCardsLoading(true);
+      Promise.all([api.getUserInfo(), api.getCards()])
+        .then(([userData, cardData]) => {
+          setCurrentUser(userData);
+          setCards(cardData);
+        }).catch(err => console.log(err)).finally(() => {
+          setIsCardsLoading(false);
+        });
+    }
+  }, [isLoggedIn]);
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -71,6 +114,12 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setToolTipData({
+      isOpen: false,
+      icon: '',
+      text: ''
+    });
+    console.log(toolTipData);
     setSelectedCard(null);
   }
 
@@ -132,7 +181,10 @@ function App() {
       <div className="App">
         <div className="page">
           <div className="page__content">
-            <Header />
+            <Header
+              email={email}
+              onLogout={onLogout}
+            />
 
             <Switch>
               <ProtectedRoute
@@ -185,11 +237,23 @@ function App() {
               </ProtectedRoute>
 
               <Route path="/sign-up">
-                <Register />
+                <Register
+                  onRegister={onRegister}
+                />
+                <InfoTooltip
+                  data={toolTipData}
+                  onClose={closeAllPopups}
+                />
               </Route>
 
               <Route path="/sign-in">
-                <Login />
+                <Login
+                  onLogin={onLogin}
+                />
+                <InfoTooltip
+                  onClose={closeAllPopups}
+                  data={toolTipData}
+                />
               </Route>
 
             </Switch>

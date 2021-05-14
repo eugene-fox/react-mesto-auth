@@ -1,0 +1,4 @@
+.popup__tool-tip-wrapper {
+  display: flex;
+  flex-direction: column;
+}
