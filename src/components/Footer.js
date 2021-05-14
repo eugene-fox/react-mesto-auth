@@ -5,7 +5,3 @@ export function Footer() {
     </footer>
   );
 }
-
-
-
-

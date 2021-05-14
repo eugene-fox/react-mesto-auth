@@ -3,7 +3,8 @@
   min-width: 280px;
   min-height: 74px;
   /* Верхний марджин схлопывается */
-  padding: 45px 20px 40px;
+  padding-top: 45px;
+  padding-bottom: 40px;
   margin-bottom: 40px;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
   display: flex;
@@ -11,10 +12,10 @@
   flex-grow: 0;
 }
 
-/* @media screen and (max-width: 922px) {
+/* @media screen and (max-width: 920px) {
   .header {
-    margin-right: 20px;
-    margin-left: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 } */
 
